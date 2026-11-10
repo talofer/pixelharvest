@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PixelHarvest — Free Bulk WebP &amp; AVIF to JPG Converter (No Upload) + Chrome Extension</title>
+  <meta name="description" content="Convert WebP, AVIF & SVG images to clean JPG or PNG in bulk directly in your browser with zero server uploads, or install the free PixelHarvest Chrome Extension for 1-click webpage image extraction." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Image Downloader & Bulk WebP to JPG: PixelHarvest",
+    "applicationCategory": "BrowserApplication",
+    "operatingSystem": "Chrome",
+    "softwareVersion": "1.2.0",
+    "description": "Bulk download web images, photos & SVGs. Auto-convert WebP/AVIF to clean JPG/PNG with 1-click ZIP export. 100% free, no sign-up.",
+    "url": "https://talofer.github.io/pixelharvest/",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased">
+  <!-- Sticky Conversion Header -->
+  <div class="sticky top-0 z-50 bg-indigo-950/95 backdrop-blur border-b border-indigo-500/30 px-4 py-2.5">
+    <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm">
+      <p class="font-medium text-indigo-100">
+        ⚡ Want to grab and convert images directly from any webpage in 1 click?
+      </p>
+      <a
+        href="https://chromewebstore.google.com/"
+        target="_blank"
+        rel="noreferrer"
+        class="px-3.5 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-colors shadow-sm"
+      >
+        Add PixelHarvest to Chrome - Free
+      </a>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <header class="max-w-5xl mx-auto px-6 pt-12 pb-8 text-center space-y-5">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 text-xs font-medium">
+      <span>100% Client-Side HTML5 Canvas • Zero Cloud Uploads • Manifest V3 Privacy</span>
+    </div>
+    <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+      Bulk Convert <span class="text-indigo-400">WebP, AVIF &amp; SVG to Clean JPG</span> in Browser Memory
+    </h1>
+    <p class="max-w-2xl mx-auto text-slate-400 text-sm sm:text-base">
+      Drag and drop files below to convert and bundle them into a clean ZIP locally—or use the <strong>PixelHarvest Chrome Extension</strong> to extract high-resolution <code>srcset</code> galleries straight from any website.
+    </p>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-6 pb-20 space-y-14">
+    <!-- Interactive Local Drag-and-Drop Web Converter -->
+    <section class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-4">
+        <div>
+          <h2 class="text-lg font-bold text-white">Instant Local Browser Converter (Zero Upload)</h2>
+          <p class="text-xs text-slate-400">Your files never leave your computer. Processed 100% in RAM via HTML5 Canvas &amp; JSZip.</p>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <label for="web-target-format" class="text-xs text-slate-300 font-medium">Output Format:</label>
+          <select
+            id="web-target-format"
+            class="bg-slate-800 border border-slate-700 text-slate-100 text-xs rounded-lg px-3 py-1.5 font-semibold"
+          >
+            <option value="jpg" selected>Clean JPG (92% Quality)</option>
+            <option value="png">Lossless PNG</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Drop Zone -->
+      <label
+        id="drop-zone"
+        for="file-input"
+        class="flex flex-col items-center justify-center border-2 border-dashed border-indigo-500/40 hover:border-indigo-400 rounded-xl p-10 cursor-pointer bg-slate-950/60 transition-colors text-center space-y-3"
+      >
+        <div class="w-12 h-12 rounded-full bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-xl font-bold">
+          ⇩
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-white">Drag &amp; drop WebP, AVIF, SVG, or PNG files here</p>
+          <p class="text-xs text-slate-400 mt-1">or click to browse files from your computer (100% offline-capable)</p>
+        </div>
+        <input id="file-input" type="file" accept="image/*" multiple class="hidden" />
+      </label>
+
+      <!-- Selected Files Status & Convert Button -->
+      <div id="converter-status-bar" class="hidden flex flex-wrap items-center justify-between gap-4 bg-slate-950 border border-slate-800 rounded-xl p-4">
+        <span id="file-count-label" class="text-xs font-medium text-slate-300">0 files ready</span>
+        <button
+          id="btn-convert-zip"
+          type="button"
+          class="px-5 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow transition-colors"
+        >
+          Convert &amp; Download ZIP
+        </button>
+      </div>
+    </section>
+
+    <!-- Feature Pillars -->
+    <section class="grid sm:grid-cols-3 gap-6">
+      <div class="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+        <h3 class="text-base font-bold text-white">Deep DOM &amp; Srcset Harvester</h3>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Automatically resolves the highest-resolution image candidate from responsive <code>srcset</code> attributes, <code>&lt;picture&gt;</code> tags, CSS <code>background-image</code> styles, Shadow DOM, and inline SVGs while stripping out <code>&lt;16px</code> tracking pixels.
+        </p>
+      </div>
+      <div class="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+        <h3 class="text-base font-bold text-white">In-Memory WebP/AVIF to JPG</h3>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Transcodes modern WebP and AVIF assets into universally compatible <code>.jpg</code> or <code>.png</code> files using <code>createImageBitmap</code> and your browser's local HTML5 Canvas API—zero server uploads required.
+        </p>
+      </div>
+      <div class="p-6 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+        <h3 class="text-base font-bold text-white">1-Click Clean ZIP Bundle</h3>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Filter by minimum dimensions and format pills, then export your selection as a neatly sanitized <code>pixelharvest-assets.zip</code> archive in a single click.
+        </p>
+      </div>
+    </section>
+
+    <footer class="border-t border-slate-800 pt-8 flex flex-wrap items-center justify-between text-xs text-slate-500 gap-4">
+      <span>&copy; 2026 PixelHarvest Contributors (MIT License)</span>
+      <div class="flex items-center gap-4">
+        <a href="./privacy.html" class="hover:text-slate-300 underline">Privacy Policy</a>
+        <a href="./terms.html" class="hover:text-slate-300 underline">Terms of Service</a>
+        <a href="https://github.com/talofer/pixelharvest" class="hover:text-slate-300 underline">GitHub</a>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      const dropZone = document.getElementById('drop-zone');
+      const fileInput = document.getElementById('file-input');
+      const statusBar = document.getElementById('converter-status-bar');
+      const countLabel = document.getElementById('file-count-label');
+      const convertBtn = document.getElementById('btn-convert-zip');
+      const formatSelect = document.getElementById('web-target-format');
+      let queuedFiles = [];
+
+      function updateQueue(files) {
+        queuedFiles = Array.from(files || []);
+        if (queuedFiles.length > 0) {
+          statusBar.classList.remove('hidden');
+          countLabel.textContent = queuedFiles.length + ' file(s) ready for local conversion';
+        } else {
+          statusBar.classList.add('hidden');
+        }
+      }
+
+      fileInput.addEventListener('change', function (e) {
+        updateQueue(e.target.files);
+      });
+
+      dropZone.addEventListener('dragover', function (e) {
+        e.preventDefault();
+        dropZone.classList.add('border-indigo-400');
+      });
+
+      dropZone.addEventListener('dragleave', function () {
+        dropZone.classList.remove('border-indigo-400');
+      });
+
+      dropZone.addEventListener('drop', function (e) {
+        e.preventDefault();
+        dropZone.classList.remove('border-indigo-400');
+        if (e.dataTransfer && e.dataTransfer.files) {
+          updateQueue(e.dataTransfer.files);
+        }
+      });
+
+      async function convertFileToBlob(file, targetFormat) {
+        const mime = targetFormat === 'png' ? 'image/png' : 'image/jpeg';
+        const objectUrl = URL.createObjectURL(file);
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        try {
+          const img = await new Promise(function (resolve, reject) {
+            const el = new Image();
+            el.onload = function () { resolve(el); };
+            el.onerror = reject;
+            el.src = objectUrl;
+          });
+          canvas.width = img.naturalWidth || 800;
+          canvas.height = img.naturalHeight || 600;
+          if (targetFormat === 'jpg') {
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+          }
+          ctx.drawImage(img, 0, 0);
+          return await new Promise(function (resolve) {
+            canvas.toBlob(resolve, mime, targetFormat === 'jpg' ? 0.92 : undefined);
+          });
+        } finally {
+          URL.revokeObjectURL(objectUrl);
+          canvas.width = 0;
+          canvas.height = 0;
+        }
+      }
+
+      convertBtn.addEventListener('click', async function () {
+        if (!queuedFiles.length || typeof JSZip === 'undefined') return;
+        const targetFormat = formatSelect.value === 'png' ? 'png' : 'jpg';
+        convertBtn.disabled = true;
+        convertBtn.textContent = 'Converting in browser...';
+        try {
+          const zip = new JSZip();
+          for (let i = 0; i < queuedFiles.length; i++) {
+            const f = queuedFiles[i];
+            const blob = await convertFileToBlob(f, targetFormat);
+            const stem = (f.name || 'image').replace(/\.[a-zA-Z0-9]+$/, '').replace(/[^a-zA-Z0-9_-]/g, '-').slice(0, 30) || 'image';
+            const padded = String(i + 1).padStart(3, '0');
+            zip.file('pixelharvest-' + padded + '-' + stem + '.' + targetFormat, blob);
+          }
+          const zipBlob = await zip.generateAsync({ type: 'blob' });
+          const url = URL.createObjectURL(zipBlob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'pixelharvest-converted.zip';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+          countLabel.textContent = 'Converted ' + queuedFiles.length + ' file(s) to ' + targetFormat.toUpperCase() + ' ZIP!';
+        } finally {
+          convertBtn.disabled = false;
+          convertBtn.textContent = 'Convert & Download ZIP';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

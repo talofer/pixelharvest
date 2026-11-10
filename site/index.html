@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PixelHarvest — Free Bulk WebP &amp; AVIF to JPG Converter (No Upload) + Chrome Extension</title>
+  <meta name="description" content="Convert WebP, AVIF & SVG images to clean JPG or PNG in bulk directly in your browser with zero server uploads, or install the free PixelHarvest Chrome Extension for 1-click webpage image extraction." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Image Downloader & Bulk WebP to JPG: PixelHarvest",
+    "applicationCategory": "BrowserApplication",
+    "operatingSystem": "Chrome",
+    "softwareVersion": "1.2.0",
+    "description": "Bulk download web images, photos & SVGs. Auto-convert WebP/AVIF to clean JPG/PNG with 1-click ZIP export. 100% free, no sign-up.",
+    "url": "https://talofer.github.io/pixelharvest/",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased">
+  <!-- Sticky Conversion Header -->
+  <div class="sticky top-0 z-50 bg-indigo-950/95 backdrop-blur border-b border-indigo-500/30 px-4 py-2.5">
+    <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm">
+      <p class="font-medium text-indigo-100">
+        ⚡ Want to grab and convert images directly from any webpage in 1 click?
+      </p>
+      <a
+        href="https://chromewebstore.google.com/"
+        target="_blank"
+        rel="noreferrer"
+        class="px-3.5 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-colors shadow-sm"
+      >
+        Add PixelHarvest to Chrome - Free
+      </a>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <header class="max-w-5xl mx-auto px-6 pt-12 pb-8 text-center space-y-5">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 text-xs font-medium">
+      <span>100% Client-Side HTML5 Canvas • Zero Cloud Uploads • Manifest V3 Privacy</span>
+    </div>
+    <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+      Bulk Convert <span class="text-indigo-400">WebP, AVIF &amp; SVG to Clean JPG</span> in Browser Memory
+    </h1>
+    <p class="max-w-2xl mx-auto text-slate-400 text-sm sm:text-base">
+      Drag and drop files below to convert and bundle them into a clean ZIP locally—or use the <strong>PixelHarvest Chrome Extension</strong> to extract high-resolution <code>srcset</code> galleries straight from any website.
+    </p>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-6 pb-20 space-y-14">
+    <section class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-4">
+        <div>
+          <h2 class="text-lg font-bold text-white">Instant Local Browser Converter (Zero Upload)</h2>
+          <p class="text-xs text-slate-400">Your files never leave your computer. Processed 100% in RAM via HTML5 Canvas &amp; JSZip.</p>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <label for="web-target-format" class="text-xs text-slate-300 font-medium">Output Format:</label>
+          <select
+            id="web-target-format"
+            class="bg-slate-800 border border-slate-700 text-slate-100 text-xs rounded-lg px-3 py-1.5 font-semibold"
+          >
+            <option value="jpg" selected>Clean JPG (92% Quality)</option>
+            <option value="png">Lossless PNG</option>
+          </select>
+        </div>
+      </div>
+
+      <label
+        id="drop-zone"
+        for="file-input"
+        class="flex flex-col items-center justify-center border-2 border-dashed border-indigo-500/40 hover:border-indigo-400 rounded-xl p-10 cursor-pointer bg-slate-950/60 transition-colors text-center space-y-3"
+      >
+        <div class="w-12 h-12 rounded-full bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-xl font-bold">
+          ⇩
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-white">Drag &amp; drop WebP, AVIF, SVG, or PNG files here</p>
+          <p class="text-xs text-slate-400 mt-1">or click to browse files from your computer (100% offline-capable)</p>
+        </div>
+        <input id="file-input" type="file" accept="image/*" multiple class="hidden" />
+      </label>
+
+      <div id="converter-status-bar" class="hidden flex flex-wrap items-center justify-between gap-4 bg-slate-950 border border-slate-800 rounded-xl p-4">
+        <span id="file-count-label" class="text-xs font-medium text-slate-300">0 files ready</span>
+        <button
+          id="btn-convert-zip"
+          type="button"
+          class="px-5 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow transition-colors"
+        >
+          Convert &amp; Download ZIP
+        </button>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — PixelHarvest Chrome Extension</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans leading-relaxed">
+  <main class="max-w-3xl mx-auto px-6 py-12 bg-white my-8 shadow-sm rounded-xl border border-slate-200">
+    <header class="border-b border-slate-200 pb-6 mb-8">
+      <h1 class="text-3xl font-bold text-slate-900">PixelHarvest Privacy Policy</h1>
+      <p class="text-sm text-slate-500 mt-2">Effective Date: November 2026 • Manifest V3 Zero-Backend Architecture</p>
+    </header>
+
+    <div class="space-y-6 text-sm text-slate-700">
+      <section>
+        <h2 class="text-lg font-semibold text-slate-900 mb-2">1. 100% Client-Side, In-Memory Processing</h2>
+        <p>
+          <strong>PixelHarvest</strong> operates strictly inside your local browser memory (RAM). All DOM asset discovery (<code>&lt;img&gt;</code>, <code>&lt;picture&gt;</code>, CSS <code>background-image</code>, and inline <code>&lt;svg&gt;</code>), HTML5 Canvas image transcoding (WebP/AVIF to JPG/PNG), and ZIP archiving via JSZip happen locally on your device. Your images, browsing history, and page URLs are <strong>never</strong> uploaded, stored, or transmitted to any remote server.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-semibold text-slate-900 mb-2">2. Minimal Chrome Manifest V3 Permissions</h2>
+        <ul class="list-disc pl-5 space-y-1.5">
+          <li><strong><code>activeTab</code>:</strong> Grants temporary, on-demand access to inspect the currently open tab only when you explicitly click the PixelHarvest toolbar button. PixelHarvest never requests <code>&lt;all_urls&gt;</code> host permissions.</li>
+          <li><strong><code>downloads</code>:</strong> Used solely to save your selected images or bundled <code>.zip</code> archive directly to your computer's local Downloads folder.</li>
+          <li><strong><code>storage</code>:</strong> Uses <code>chrome.storage.local</code> strictly to store local UI preferences and anonymous pricing survey state on your device.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-semibold text-slate-900 mb-2">3. Zero-PII Anonymous Telemetry</h2>
+        <p>
+          When a batch selection exceeds the 25-image free threshold, PixelHarvest displays an optional pricing feedback prompt and sends a fire-and-forget anonymous counter event (containing only numerical asset count, variant number, button choice, target format, and timestamp). It never includes page URLs, domain names, IP-identifying metadata, or image contents.
+        </p>
+      </section>
+
+      <section class="border-t border-slate-200 pt-6">
+        <h2 class="text-lg font-semibold text-slate-900 mb-1">Contact</h2>
+        <p class="text-xs text-slate-500">
+          For privacy questions or support, please open an issue on our public repository:
+          <a href="https://github.com/talofer/pixelharvest/issues" class="text-indigo-600 underline">https://github.com/talofer/pixelharvest/issues</a>
+        </p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
