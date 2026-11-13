@@ -1,12 +1,15 @@
 # Image Downloader & Bulk WebP/AVIF to JPG Converter - PixelHarvest
 
-[![Manifest V3](https://img.shields.io/badge/Chrome-Manifest%20V3-10b981?style=flat-square&logo=googlechrome&logoColor=white)](https://talofer.github.io/pixelharvest/)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/mpdjciplejafjpdjkapfjafbgamebfco?label=Chrome%20Web%20Store&logo=googlechrome&logoColor=white&color=10b981)](https://chromewebstore.google.com/detail/image-downloader-bulk-web/mpdjciplejafjpdjkapfjafbgamebfco)
+[![Manifest V3](https://img.shields.io/badge/Chrome-Manifest%20V3-10b981?style=flat-square&logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/image-downloader-bulk-web/mpdjciplejafjpdjkapfjafbgamebfco)
 [![100% Local Processing](https://img.shields.io/badge/Privacy-100%25%20Client--Side-38bdf8?style=flat-square)](https://talofer.github.io/pixelharvest/privacy.html)
 [![License: MIT](https://img.shields.io/badge/License-MIT-8b5cf6?style=flat-square)](LICENSE)
 
 **PixelHarvest** is a zero-server, privacy-first **Chrome Manifest V3 extension** and [interactive web micro-tool](https://talofer.github.io/pixelharvest/) built for e-commerce operators, UI/UX designers, frontend engineers, and researchers who need to **bulk download images from any webpage** and **automatically convert stubborn `.webp`, `.avif`, and `.svg` files into clean `.jpg` or `.png` archives** with a single click.
 
-🔗 **Try the Free Browser Drag & Drop Converter:** [https://talofer.github.io/pixelharvest/](https://talofer.github.io/pixelharvest/)
+👉 **[Install PixelHarvest on the Chrome Web Store (100% Free)](https://chromewebstore.google.com/detail/image-downloader-bulk-web/mpdjciplejafjpdjkapfjafbgamebfco)**  
+🔗 **Try the Free Browser Drag & Drop Converter:** [https://talofer.github.io/pixelharvest/](https://talofer.github.io/pixelharvest/)  
+📊 **Also by our team:** [RowCraft Table to CSV & Excel Extractor](https://chromewebstore.google.com/detail/ofhajfbdajpjidhcpbofkoeaegjjafeg) ([Web Utility](https://talofer.github.io/rowcraft/))
 
 ---
 
