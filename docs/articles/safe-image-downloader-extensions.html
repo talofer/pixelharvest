@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="DJPxPRV0Qgn9BNlFgCiaTxv9-z0V3OlWtmHD3aBxuGI" />
+  <title>How to Audit Chrome Image Downloader Extensions for MV3 Security — PixelHarvest</title>
+  <meta name="description" content="Security checklist for Chrome image downloader extensions: activeTab vs <all_urls>, XML inline SVG XSS sanitization, Zip-Slip filename protection, and 4K OOM crash guards." />
+  <link rel="canonical" href="https://talofer.github.io/pixelharvest/articles/safe-image-downloader-extensions.html" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How to Audit Chrome Image Downloader Extensions for Manifest V3 Security & Privacy",
+    "author": { "@type": "Organization", "name": "PixelHarvest" },
+    "datePublished": "2026-11-10",
+    "dateModified": "2026-11-25",
+    "mainEntityOfPage": "https://talofer.github.io/pixelharvest/articles/safe-image-downloader-extensions.html"
+  }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased">
+  <div class="sticky top-0 z-50 bg-indigo-950/95 border-b border-indigo-500/40 px-4 py-2.5 shadow-lg">
+    <div class="max-w-4xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm font-semibold">
+      <span class="text-indigo-100">Zero &lt;all_urls&gt; · Privacy-First MV3 Bulk Image Downloader</span>
+      <a href="https://chromewebstore.google.com/detail/image-downloader-bulk-web/mpdjciplejafjpdjkapfjafbgamebfco" class="px-3 py-1 rounded-lg bg-emerald-500 text-slate-950 font-bold text-xs">Add PixelHarvest to Chrome — Free</a>
+    </div>
+  </div>
+  <main class="max-w-3xl mx-auto px-6 py-12 space-y-8 leading-relaxed">
+    <a href="../index.html" class="text-xs font-semibold text-indigo-400 hover:underline">&larr; Back to PixelHarvest</a>
+    <header class="space-y-3">
+      <span class="px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-semibold">Security Audit · Chrome Manifest V3</span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-white">How to Audit Chrome Image Downloader Extensions for Manifest V3 Security &amp; Privacy</h1>
+      <p class="text-slate-400 text-sm">Published by PixelHarvest · Updated November 25, 2026</p>
+    </header>
+    <article class="space-y-6 text-slate-300 text-sm sm:text-base">
+      <p>Legacy image downloaders frequently request broad <code>&lt;all_urls&gt;</code> permissions, extract unsanitized inline <code>&lt;svg&gt;</code> markup, or crash browser tabs when transcoding 4K galleries. Here are the 4 defense-in-depth security layers engineered into PixelHarvest:</p>
+      <ul class="list-disc pl-6 space-y-2">
+        <li><strong>Least-Privilege <code>activeTab</code> Only:</strong> Cannot inspect any tab in the background—activates strictly when you click the toolbar icon.</li>
+        <li><strong>Isolated XML <code>&lt;svg&gt;</code> XSS Sanitizer:</strong> Parses inline SVGs via <code>DOMParser('image/svg+xml')</code>, stripping <code>&lt;script&gt;</code>, <code>&lt;foreignObject&gt;</code>, <code>on*</code> handlers, and <code>javascript:</code> URIs.</li>
+        <li><strong>Zip-Slip Filename Sanitization:</strong> Neutralizes <code>../</code> traversal sequences and OS reserved names into clean indexed filenames (<code>pixelharvest-001-hero.jpg</code>).</li>
+        <li><strong>3-Worker Memory Pool:</strong> Bounds concurrent <code>createImageBitmap</code> + HTML5 Canvas jobs with deterministic <code>bitmap.close()</code> cleanup so 4K galleries never crash Chrome.</li>
+      </ul>
+      <div class="p-6 rounded-2xl bg-slate-900 border border-indigo-500/40 space-y-3 mt-8">
+        <h3 class="text-lg font-bold text-white">Switch to a Zero-Trust MV3 Image Downloader</h3>
+        <a href="https://chromewebstore.google.com/detail/image-downloader-bulk-web/mpdjciplejafjpdjkapfjafbgamebfco" class="inline-block px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs">Install PixelHarvest on Chrome Web Store &rarr;</a>
+      </div>
+    </article>
+  </main>
+</body>
+</html>
